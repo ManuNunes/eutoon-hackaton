@@ -16,21 +16,22 @@ class ProductController {
 
     const user = await auth.getUser()
 
-    const { perPage = 20, page = 1, categoria, subCategoria, order = "asc", field = "created_at" } = request.get()
+    const { perPage = 20, page = 1, categoria, subCategoria, order = "asc", field = "created_at" } = request.all()
 
     let query = {
-      user_id: user.id
+      user_id: user.id,
     }
 
     query = categoria ? { ...query, categoria } : query
     query = subCategoria ? { ...query, subCategoria } : query
 
+    console.log(query)
+
     const products = await Product
       .query()
       .where(query)
-      .orderBy("created_at")
+      .orderBy(field)
       .paginate(page, perPage)
-
 
     response.json(products)
 
