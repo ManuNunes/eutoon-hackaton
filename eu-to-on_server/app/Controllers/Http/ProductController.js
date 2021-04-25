@@ -19,8 +19,9 @@ class ProductController {
     const { perPage = 20, page = 1, categoria, subCategoria, order = "asc", field = "created_at" } = request.all()
 
     let query = {
-      user_id: user.id,
+
     }
+
     // filtro para categorias
     query = categoria ? { ...query, categoria } : query
     query = subCategoria ? { ...query, subCategoria } : query

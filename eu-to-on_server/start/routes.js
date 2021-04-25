@@ -18,11 +18,13 @@ const { RouteResource } = require('@adonisjs/framework/src/Route/Manager')
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post("/users", "UserController.create").validator("User")
-Route.put("/users/:id", "UserController.update")
-  .middleware("auth")
+Route.post("/users", "UserController.create")
+  .validator("User")
 Route.post("/session", "SessionController.create")
-
+Route.put("/users", "UserController.update")
+  .middleware("auth")
+Route.get("/users", "UserController.index")
+  .middleware("auth")
 Route.resource('product', 'ProductController')
   .apiOnly()
   .middleware("auth")
