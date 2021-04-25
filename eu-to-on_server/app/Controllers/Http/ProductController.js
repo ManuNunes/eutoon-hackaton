@@ -21,11 +21,9 @@ class ProductController {
     let query = {
       user_id: user.id,
     }
-
+    // filtro para categorias
     query = categoria ? { ...query, categoria } : query
     query = subCategoria ? { ...query, subCategoria } : query
-
-    console.log(query)
 
     const products = await Product
       .query()
@@ -46,6 +44,30 @@ class ProductController {
     const product = await Product.create(data)
 
     response.json(product)
+  }
+
+  async update({ request, response, auth, params }) {
+    const user = await auth.getUser()
+    const { id } = params
+
+    const { nome, valor, descricao } = request.all()
+
+    await Product.query()
+      .where({ id, user_id: user.id })
+      .update({ nome, valor, descricao })
+    response.json({ Success: "Produto Alterado com sucesso!" })
+  }
+
+  async destroy({ response, auth, params }) {
+    const user = await auth.getUser()
+
+    const { id } = params
+
+    await Product.query()
+      .where({ id, user_id: user.id })
+      .delete()
+
+    response.json({ Success: "Usuário foi Excluído" })
   }
 }
 
