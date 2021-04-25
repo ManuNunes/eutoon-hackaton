@@ -1,6 +1,6 @@
 import React from 'react';
-import {Container} from './styles';
-import Logo from '../../assets/logo.svg';
+import {Container} from './SignUp/styles';
+import Logo from '../assets/logo.svg';
 import {
   Button,
   Text,
@@ -11,6 +11,7 @@ import {
   TextInput,
 } from 'react-native';
 import {useState} from 'react';
+import {criarUsuario} from '../services/requests';
 
 const SignUp = () => {
   const [nome, setNome] = useState('');
@@ -19,6 +20,7 @@ const SignUp = () => {
   const [cidade, setCidade] = useState('');
   const [bairro, setBairro] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [rua, setRua] = useState('');
   const [senha, setSenha] = useState('');
 
   return (
@@ -40,25 +42,44 @@ const SignUp = () => {
       />
       <TextInput
         style={[styles.input]}
-        onChangeText={setCEP}
-        value={cep}
-        placeholder="Insira seu CEP"
+        onChangeText={setSenha}
+        value={senha}
+        placeholder="Insira sua senha"
         placeholderTextColor="gray"
       />
-      <TextInput
-        style={[styles.input]}
-        onChangeText={setCidade}
-        value={cidade}
-        placeholder="Insira sua cidade"
-        placeholderTextColor="gray"
-      />
-      <TextInput
-        style={[styles.input]}
-        onChangeText={setBairro}
-        value={bairro}
-        placeholder="Insira seu bairro"
-        placeholderTextColor="gray"
-      />
+      <View style={styles.row}>
+        <TextInput
+          style={[styles.input]}
+          onChangeText={setCEP}
+          value={cep}
+          placeholder="Insira seu CEP"
+          placeholderTextColor="gray"
+        />
+        <TextInput
+          style={[styles.input]}
+          onChangeText={setCidade}
+          value={cidade}
+          placeholder="Insira sua cidade"
+          placeholderTextColor="gray"
+        />
+      </View>
+
+      <View style={styles.row}>
+        <TextInput
+          style={[styles.input]}
+          onChangeText={setBairro}
+          value={bairro}
+          placeholder="Insira seu bairro"
+          placeholderTextColor="gray"
+        />
+        <TextInput
+          style={[styles.input]}
+          onChangeText={setRua}
+          value={rua}
+          placeholder="Insira sua rua"
+          placeholderTextColor="gray"
+        />
+      </View>
       <TextInput
         style={[styles.input]}
         onChangeText={setTelefone}
@@ -66,16 +87,19 @@ const SignUp = () => {
         placeholder="Insira seu telefone"
         placeholderTextColor="gray"
       />
-      <TextInput
-        style={[styles.input]}
-        onChangeText={setSenha}
-        value={senha}
-        placeholder="Insira sua senha"
-        placeholderTextColor="gray"
-      />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignIn')}>
+        onPress={() =>
+          criarUsuario({
+            nome: nome,
+            rua: rua,
+            email: email,
+            password: senha,
+            phone: telefone,
+            cidade: cidade,
+            CEP: cep,
+          })
+        }>
         <Text>Cadastrar</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -98,6 +122,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
     backgroundColor: 'white',
+    minWidth: '45%',
   },
   button: {
     alignItems: 'center',
@@ -111,6 +136,11 @@ const styles = StyleSheet.create({
   },
   nome: {
     marginTop: 64,
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 });
 

@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Logo from '../../assets/logo.svg';
-import Comprar from '../../assets/comprar.svg';
-import Vender from '../../assets/vender.svg';
+import Logo from '../assets/logo.svg';
+import Comprar from '../assets/comprar.svg';
+import Vender from '../assets/vender.svg';
 import {
   Button,
   Text,
@@ -25,7 +25,7 @@ const TypeSelection = () => {
 
       <TouchableOpacity
         style={[styles.button, styles.comprar]}
-        onPress={() => navigation.navigate('SignIn')}>
+        onPress={() => navigation.navigate('ListaProdutos')}>
         <Text>Cliente</Text>
       </TouchableOpacity>
 

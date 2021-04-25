@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Logo from '../../assets/logo.svg';
-
+import Logo from '../assets/logo.svg';
+import {LoadingIcon} from './styles';
 import {
   Button,
   Text,
@@ -10,13 +10,17 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
-const Prelogin = () => {
+const SplashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const checkToke = async () => {
+    setTimeout(() => {
+      navigation.navigate('TypeSelection');
+    }, 250);
+    const checkToken = async () => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
         // validação
@@ -27,17 +31,7 @@ const Prelogin = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Logo width="100%" height="160" />
-      <TouchableOpacity
-        style={[styles.button, styles.signin]}
-        onPress={() => navigation.navigate('SignIn')}>
-        <Text>Entre com sua conta</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, styles.signup]}
-        onPress={() => navigation.navigate('SignUp')}>
-        <Text>Cadastre-se</Text>
-      </TouchableOpacity>
+      <LoadingIcon size="large" color="white" />
     </SafeAreaView>
   );
 };
@@ -47,27 +41,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    paddingHorizontal: 64,
+    paddingHorizontal: 32,
     backgroundColor: '#F9E087',
   },
 
   button: {
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#DDDDDD',
     padding: 16,
+    marginVertical: 8,
     borderRadius: 64,
   },
-  signin: {
-    marginTop: 32,
-    marginBottom: 8,
-  },
-  signup: {
-    marginVertical: 8,
-    backgroundColor: '#82E6F4',
-  },
-  logo: {
-    marginBottom: 50,
+  image: {
+    width: 100,
+    height: 100,
   },
 });
 
-export default Prelogin;
+export default SplashScreen;

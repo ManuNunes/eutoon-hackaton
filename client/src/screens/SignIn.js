@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import Logo from '../../assets/logo.svg';
+import Logo from '../assets/logo.svg';
 import {
   Button,
   Text,
@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import {login} from '../services/auth';
 
 const SignIn = () => {
   const [user, setUser] = React.useState('');
@@ -34,7 +35,9 @@ const SignIn = () => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignIn')}>
+        onPress={() =>
+          login({email: 'manuelly@teste.com.br', senha: '123456'})
+        }>
         <Text>Entrar</Text>
       </TouchableOpacity>
     </SafeAreaView>
