@@ -1,5 +1,7 @@
 'use strict'
 
+const { RouteResource } = require('@adonisjs/framework/src/Route/Manager')
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -16,4 +18,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post("/users", "UserController.create")
+Route.post("/users", "UserController.create").validator("User")
+Route.put("/users/:id", "UserController.update")
+  .middleware("auth")
+Route.post("/session", "SessionController.create")
+
+Route.resource('product', 'ProductController')
+  .apiOnly()
+  .middleware("auth")
