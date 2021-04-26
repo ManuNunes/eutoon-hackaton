@@ -1,28 +1,30 @@
-# Adonis API application
+# API - EU To ON
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+A api cria os vendedores e os autentica, cadastra os produtos, traz filtros para produtos e por localidade.
 
 ## Setup
 
-Use the adonis command to install the blueprint
+para usar a API em seu ambiente de desenvolvimento, basta executar o seguinte comando
 
 ```bash
-adonis new yardstick --api-only
+adonis serve --dev
 ```
 
-or manually clone the repo and then run `npm install`.
+### Lembre-se de configurar corretamente o arquivo .env com os dados do seu banco de dados
 
+caso queira consumir a API externamente, pode conseguir através do heroku
 
-### Migrations
+https://eu-to-on.herokuapp.com/
 
-Run the following command to run startup migrations.
+### Rotas
 
-```js
-adonis migration:run
-```
+## GET
+
+- /users
+- /products/:id
+
+## POST
+
+- /sessions
+- /products
+- /users
