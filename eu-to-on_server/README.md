@@ -22,6 +22,7 @@ https://eu-to-on.herokuapp.com/
 
 - /users
 - /products/:id
+- /products/
 
 ## POST
 
