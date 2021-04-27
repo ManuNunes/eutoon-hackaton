@@ -25,6 +25,6 @@ https://eu-to-on.herokuapp.com/
 
 ## POST
 
-- /sessions
+- /session
 - /products
 - /users
